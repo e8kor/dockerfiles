@@ -20,7 +20,7 @@ if [[ ! -d "binary/$spark_release_name" ]]; then
 fi
 
 echo "building spark $spark_version image"
-export ARCHS='--platform linux/arm --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11 -f ./Dockerfile build
+export ARCHS='--platform linux/arm64,linux/arm --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11 -f ./Dockerfile build
 
 echo "pushing spark $spark_version image"
 docker tag e8kor/apache-spark/spark:$image_tag $image_name:$image_tag \

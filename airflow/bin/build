@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker buildx build --push --platform linux/arm64,linux/arm --push -t e8kor/apache-airflow:latest .

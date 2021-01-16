@@ -22,7 +22,11 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build multi platform
+      - name: Build apache airflow
         working-directory: './airflow/'
         run: |
-          docker buildx build --platform linux/arm64,linux/arm/v7 --push -t $DOCKER_REPO/pipelines:airflow .
+          ./bin/build
+      - name: Build apache spark
+        working-directory: './airflow/'
+        run: |
+          ./bin/build

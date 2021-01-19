@@ -1,0 +1,32 @@
+
+{
+  "port": "9080",
+
+  "use_auth": false,
+
+  "jwt": {
+    "admin": {
+      "key": "ivd7dfORN7QNeKVO"
+    },
+    "user": {
+      "key": "gZPgdZ8NtBNj6jfp"
+    }
+  },
+
+  "glusterfs": {
+    "executor": "ssh",
+    "sshexec": {
+      "keyfile": "/etc/heketi/heketi_key",
+      "user": "pi",
+      "sudo": true,
+      "port": "22",
+      "fstab": "/etc/fstab",
+      "backup_lvm_metadata": false
+    },
+    "db": "/var/lib/heketi/heketi.db",
+    "kubeexec": {
+      "rebalance_on_expansion": true
+    }
+  },
+  "backup_db_to_kube_secret": false
+}

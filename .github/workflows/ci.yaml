@@ -22,11 +22,19 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build apache airflow
-        working-directory: './airflow/'
+      - name: Build glusterfs
+        working-directory: './glusterfs'
+        run: |
+          ../bin/push e8kor/glusterfs .
+      - name: Build heketi
+        working-directory: './heketi'
+        run: |
+          ../bin/push e8kor/heketi .
+      - name: Build apache spark
+        working-directory: './spark'
         run: |
           ./bin/build
-      - name: Build apache spark
-        working-directory: './airflow/'
+      - name: Build apache airflow
+        working-directory: './airflow'
         run: |
           ./bin/build

@@ -1,9 +1,6 @@
-
 {
   "port": "9080",
-
   "use_auth": false,
-
   "jwt": {
     "admin": {
       "key": "ivd7dfORN7QNeKVO"
@@ -12,21 +9,32 @@
       "key": "gZPgdZ8NtBNj6jfp"
     }
   },
-
+  "profiling": false,
+  "backup_db_to_kube_secret": false,
   "glusterfs": {
+    "db": "/var/lib/heketi/heketi.db",
+    "loglevel" : "debug",
+    "auto_create_block_hosting_volume": true,
     "executor": "ssh",
     "sshexec": {
       "keyfile": "/etc/heketi/heketi_key",
-      "user": "pi",
+      "user": "root",
       "sudo": true,
       "port": "22",
       "fstab": "/etc/fstab",
       "backup_lvm_metadata": false
     },
-    "db": "/var/lib/heketi/heketi.db",
     "kubeexec": {
-      "rebalance_on_expansion": true
+      "host" :"https://192.168.0.211:8443",
+      "cert" : "/path/to/crt.file",
+      "insecure": false,
+      "user": "Admin",
+      "password": "AdminPass",
+      "namespace": "default",
+      "max_connections": 5,
+      "fstab": "/etc/fstab",
+      "backup_lvm_metadata": false,
+      "debug_umount_failures": true
     }
-  },
-  "backup_db_to_kube_secret": false
+  }
 }

@@ -2,7 +2,7 @@ FROM ubuntu
 
 ENV LOG_LEVEL=INFO
 ENV GLUSTERD_OPTIONS=
-VOLUME /devices
+COPY entrypoint.sh /entrypoint.sh
 
 RUN apt-get update -yqq \
     && apt-get upgrade -yqq \

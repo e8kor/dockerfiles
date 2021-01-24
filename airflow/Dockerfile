@@ -1,4 +1,11 @@
+# VERSION 1.10.9
+# AUTHOR: Matthieu "Puckel_" Roisil
+# DESCRIPTION: Basic Airflow container
+# BUILD: docker build --rm -t puckel/docker-airflow .
+# SOURCE: https://github.com/puckel/docker-airflow
+
 FROM python:3.7-slim-buster
+LABEL maintainer="Puckel_"
 
 # Never prompt the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
@@ -49,8 +56,6 @@ RUN set -ex \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
-    && pip install cython \
-    && pip install numpy \
     && pip install pytz \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \

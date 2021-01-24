@@ -7,4 +7,4 @@ for node in "$@"; do
 done
 gluster peer status > /dev/stdout
 
-tail -f /proc/$PID/fd/1
+tail -f /var/log/glusterfs/glusterd.log

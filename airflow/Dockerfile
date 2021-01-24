@@ -51,11 +51,14 @@ RUN set -ex \
         rsync \
         netcat \
         locales \
+        python3-pandas \
+        python3-numpy \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
+    # && pip install --extra-index-url=https://gergely.imreh.net/wheels/ numpy \
     && pip install pytz \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \

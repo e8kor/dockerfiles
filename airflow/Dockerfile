@@ -27,6 +27,22 @@ ENV LC_MESSAGES en_US.UTF-8
 
 # Disable noisy "Handling signal" log messages:
 # ENV GUNICORN_CMD_ARGS --log-level WARNING
+RUN apt-get update -yqq \
+    && apt-get upgrade -yqq \
+    && apt-get install -yqq --no-install-recommends \
+        freetds-bin \
+        build-essential \
+        gcc \
+        default-libmysqlclient-dev \
+        apt-utils \
+        curl \
+        rsync \
+        netcat \
+        locales \
+        python3-pandas \
+        python3-numpy
+
+ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages"
 
 RUN set -ex \
     && buildDeps=' \
@@ -38,27 +54,12 @@ RUN set -ex \
         libpq-dev \
         git \
     ' \
-    && apt-get update -yqq \
-    && apt-get upgrade -yqq \
-    && apt-get install -yqq --no-install-recommends \
-        $buildDeps \
-        freetds-bin \
-        build-essential \
-        gcc \
-        default-libmysqlclient-dev \
-        apt-utils \
-        curl \
-        rsync \
-        netcat \
-        locales \
-        python3-pandas \
-        python3-numpy \
+    && apt-get install -yqq --no-install-recommends $buildDeps \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
-    # && pip install --extra-index-url=https://gergely.imreh.net/wheels/ numpy \
     && pip install pytz \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \

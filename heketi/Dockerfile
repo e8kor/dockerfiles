@@ -21,4 +21,4 @@ RUN curl -SL https://github.com/heketi/heketi/releases/download/v${VERSION}/heke
 COPY lib/* /etc/heketi
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]

@@ -7,8 +7,8 @@ echo "Service is running pid: ${PID}"
 
 heketi-cli topology load --json=/etc/heketi/topology.json
 echo "topoloty loaded"
-FILE=/etc/docker
-if [ ! -f "/proc/$PID/fd/1" ]; then
+
+if [ -f "/proc/$PID/fd/1" ]; then
     echo "tail for pid logs" 
     tail -f /proc/$PID/fd/1
 else

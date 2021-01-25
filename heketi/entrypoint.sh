@@ -1,11 +1,11 @@
 #!/bin/bash
 echo "Starting heketi"
-heketi --config=/etc/heketi/heketi.json &
+heketi --config=/etc/heketi/heketi.json > /dev/stdout &
 
 PID="$!"
 echo "Service is running pid: ${PID}"
 
-heketi-cli topology load --json=/etc/heketi/topology.json
+heketi-cli topology load --json=/etc/heketi/topology.json > /dev/stdout
 echo "topoloty loaded"
 
 if [ -f "/proc/$PID/fd/1" ]; then

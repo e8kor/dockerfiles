@@ -18,10 +18,7 @@ RUN curl -SL https://github.com/heketi/heketi/releases/download/v${VERSION}/heke
     && cp /etc/heketi/heketi /usr/bin/heketi \
     && cp /etc/heketi/heketi-cli /usr/bin/heketi-cli
 
-COPY lib/heketi_key /etc/heketi
-COPY lib/heketi_key.pub /etc/heketi
-COPY lib/heketi.json /etc/heketi
-COPY lib/topology.json /etc/heketi
+COPY lib/* /etc/heketi
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]

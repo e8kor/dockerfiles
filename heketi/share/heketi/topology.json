@@ -12,10 +12,6 @@
                     {
                         "name": "/dev/mmcblk0",
                         "destroydata": true
-                    },
-                    {
-                        "name": "/dev/sda",
-                        "destroydata": true
                     }
                 ]
             },
@@ -31,10 +27,6 @@
                     {
                         "name": "/dev/mmcblk0",
                         "destroydata": true
-                    },
-                    {
-                        "name": "/dev/sdb",
-                        "destroydata": true
                     }
                 ]
             },
@@ -49,10 +41,6 @@
                 "devices": [
                     {
                         "name": "/dev/mmcblk0",
-                        "destroydata": true
-                    },
-                    {
-                        "name": "/dev/sdb",
                         "destroydata": true
                     }
                 ]

@@ -22,10 +22,6 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build glusterfs for centos
-        working-directory: './glusterfs-centos'
-        run: |
-          ../bin/push e8kor/glusterfs:centos .
       - name: Build glusterfs
         working-directory: './glusterfs'
         run: |

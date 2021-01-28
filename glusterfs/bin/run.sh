@@ -53,7 +53,7 @@ perl -p -i -e "s/#?PasswordAuthentication .*/PasswordAuthentication yes/g" /etc/
 perl -p -i -e "s/#?PermitRootLogin .*/PermitRootLogin yes/g" /etc/ssh/sshd_config
 grep ClientAliveInterval /etc/ssh/sshd_config >/dev/null 2>&1 || echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config
 
-systemctl restart ssh.service
-systemctl restart glusterd.service
+systemctl restart ssh
+systemctl restart glusterd
 join-gluster.sh
 tail -f /var/log/glusterfs/glusterd.log

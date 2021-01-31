@@ -14,7 +14,6 @@ RUN apt-get update -yqq                              \
     && apt-get install -yqq xfsprogs                 \
         net-tools                                    \
         iproute2                                     \
-        supervisor                                   \
         openssh-server                               \
         openssh-client                               \
         dnsutils sshpass                             \
@@ -32,6 +31,5 @@ RUN apt-get update -yqq                              \
     && mkdir -p /var/run/sshd /root/.ssh /var/log/supervisor /usr/local/bin
 
 ADD ./bin /usr/local/bin
-ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-ENTRYPOINT ["sh", "/usr/local/bin/run.sh"]
+ENTRYPOINT ["bash", "/usr/local/bin/start-heketi.sh", ">", "/dev/stdout"]

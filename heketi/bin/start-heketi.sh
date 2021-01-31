@@ -41,8 +41,7 @@ archive_db() {
         return 1
     fi
 
-    mapfile -t afiles < <(find "${HEKETI_DB_ARCHIVE_PATH}" \
-        -maxdepth 1 -name 'heketi.db-archive-*.gz' | sort)
+    mapfile -t afiles < <(find "${HEKETI_DB_ARCHIVE_PATH}" -maxdepth 1 -name 'heketi.db-archive-*.gz' | sort)
     newname="heketi.db-archive-$(date +%Y-%m-%d.%s).gz"
     newpath="${HEKETI_DB_ARCHIVE_PATH}/${newname}"
     gzip -9 -c "${HEKETI_PATH}/heketi.db" > "${newpath}"

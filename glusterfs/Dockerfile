@@ -50,4 +50,4 @@ RUN systemctl set-default multi-user.target \
     /lib/systemd/system/plymouth*                          \
     /lib/systemd/system/systemd-update-utmp*
 
-CMD ["/lib/systemd/systemd", "&", ";", "sh", "/usr/local/bin/run.sh"]
+CMD ["/lib/systemd/systemd", "&", ";", "bash", "/usr/local/bin/run.sh"]

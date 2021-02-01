@@ -17,6 +17,7 @@ ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
+ENV AIRFLOW_TEST_CONFIG=${AIRFLOW_USER_HOME}/unittests.cfg
 
 # Define en_US.
 ENV LANGUAGE en_US.UTF-8
@@ -81,11 +82,11 @@ RUN set -ex \
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 
-RUN chown -R airflow: ${AIRFLOW_USER_HOME}
+# RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
 EXPOSE 8080 5555 8793
 
-USER airflow
+# USER airflow
 WORKDIR ${AIRFLOW_USER_HOME}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["webserver"]

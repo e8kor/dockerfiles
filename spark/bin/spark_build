@@ -1,6 +1,6 @@
 #!/bin/bash
 
-spark_version='3.0.1'
+spark_version='3.0.2'
 hadoop_version='2.7'
 image_name='e8kor'
 image_tag="$spark_version"
@@ -24,7 +24,3 @@ export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/d
 export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile push 
 export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile -p ./PyDockerfile build 
 export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile -p ./PyDockerfile push 
-echo "pushing spark $spark_version image"
-# docker tag e8kor/apache-spark/spark:$image_tag $image_name:$image_tag \
-# docker tag e8kor/apache-spark/spark:$image_tag $image_name:py-$image_tag \
-# && docker push $image_name:$image_tag 

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+spark_version='3.0.2'
+hadoop_version='3.2'
+image_name='e8kor'
+image_tag="$spark_version"
+spark_release_name="spark-$spark_version-bin-hadoop$hadoop_version"
+spark_archive_name="${spark_release_name}.tgz"
+
+mkdir -p binary && mkdir -p temp 
+
+if [[ ! -f "temp/$spark_archive_name" ]]; then
+    echo "downloading spark $spark_version"
+    curl https://apache.mirrors.tworzy.net/spark/spark-$spark_version/$spark_archive_name --output ./temp/$spark_archive_name
+fi
+
+if [[ ! -d "binary/$spark_release_name" ]]; then
+    echo "unzipping spark binary $spark_version"
+    tar -xzf temp/$spark_archive_name -C ./binary
+fi
+
+echo "building spark $spark_version image"
+export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile build 
+export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile push 
+export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile -p ./PyDockerfile build 
+export ARCHS='--platform linux/arm64 --load'; ./binary/$spark_release_name/bin/docker-image-tool.sh -X -r $image_name -t $image_tag -b java_image_tag=11  -f ./Dockerfile -p ./PyDockerfile push 
